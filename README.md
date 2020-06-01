@@ -1,1 +1,1 @@
-"# expense-logger" 
+Expense Logger
