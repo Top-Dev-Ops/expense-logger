@@ -1,30 +1,43 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Add Expense</ion-title>
-    <ion-button slot="end" fill="outline" (click)="dismissModal()">
-      X
-    </ion-button>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Add Expense</ion-title>
+        <ion-button slot="end" fill="solid" (click)="dismissModal()" color="danger">
+            <ion-icon name="close-circle-outline" size="large"></ion-icon>
+        </ion-button>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="addExpenseForm">
-    <ion-item>
-      <ion-input type="text" formControlName="amount" placeholder="Type Amount"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-textarea type="text" formControlName="description" placeholder="Type Description"></ion-textarea>
-    </ion-item>
-    <ion-item>
-      <ion-label>Select Type</ion-label>
-      <ion-select value="brown" interface="popover" formControlName="type">
-        <ion-select-option>General</ion-select-option>
-        <ion-select-option>Grocery</ion-select-option>
-        <ion-select-option>Shopping</ion-select-option>
-        <ion-select-option>Coffee</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-button color="primary" fill="solid" expand="block">add</ion-button>
-    <ion-button color="primary" fill="solid" expand="block">cancel</ion-button>
-  </form>
+    <form [formGroup]="addExpenseForm">
+        <ion-label
+                color="danger"
+                position="floating"
+                *ngIf="addExpenseForm.controls.amount.invalid && addExpenseForm.controls.amount.touched"
+        >
+            Amount is Not Valid
+        </ion-label>
+        <ion-item>
+            <ion-input type="number" formControlName="amount" placeholder="Type Amount"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-textarea type="text" formControlName="description" placeholder="Type Description"></ion-textarea>
+        </ion-item>
+        <ion-item>
+            <ion-label>Select Type</ion-label>
+            <ion-select value="brown" interface="popover" formControlName="type">
+                <ion-select-option [value]="type.value"
+                                   *ngFor="let type of expenseTypes | keyvalue">{{type.value}}</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <br>
+        <ion-button
+                color="primary"
+                fill="solid"
+                size="large"
+                expand="block"
+                (click)="initCreateExpense()"
+                [disabled]="!addExpenseForm.valid"
+        >add
+        </ion-button>
+    </form>
 </ion-content>

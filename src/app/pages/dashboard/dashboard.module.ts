@@ -4,9 +4,10 @@ import {RouterModule} from '@angular/router';
 import {DashboardComponent} from './dashboard.component';
 import {IonicModule} from '@ionic/angular';
 import {SharedModule} from '../../shared/shared.module';
+import {CategoryPipe} from '../../pipes/category.pipe';
 
 @NgModule({
-    declarations: [DashboardComponent],
+    declarations: [DashboardComponent, CategoryPipe],
     imports: [
         CommonModule,
         RouterModule.forChild([{path: '', component: DashboardComponent}]),
